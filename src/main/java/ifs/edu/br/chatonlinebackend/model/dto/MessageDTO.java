@@ -1,18 +1,20 @@
 package ifs.edu.br.chatonlinebackend.model.dto;
 
 import ifs.edu.br.chatonlinebackend.model.enums.MessageType;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
-import java.time.Instant;
+import java.util.Date;
 
 @Builder
 @Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class MessageDTO {
 
-    String from;
-    MessageType type;
-    String content;
-    Instant date;
+    private String from;
+    private MessageType type;
+    private String content;
+    private Date date;
 
 }

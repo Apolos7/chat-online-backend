@@ -18,7 +18,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
 
 @Configuration
-@EnableWebSecurity(debug = true) // for debbug only
+@EnableWebSecurity(debug = false) // for debbug only
 @EnableMethodSecurity
 public class WebSecurityConfig {
 
@@ -32,7 +32,7 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf((csrf) -> csrf.disable())
                 .authorizeHttpRequests((authRequest) ->
-                        authRequest.requestMatchers("/", "/authenticate").permitAll()
+                        authRequest.requestMatchers("/authenticate").permitAll()
                                 .requestMatchers(toH2Console()).permitAll()
                                 .anyRequest().authenticated()
                 )
@@ -49,11 +49,6 @@ public class WebSecurityConfig {
             throws Exception {
         return authConfiguration.getAuthenticationManager();
     }
-
-    /*@Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().requestMatchers("/h2-console/**");
-    }*/
 
     @Bean
     public PasswordEncoder getPasswordEncoder() {
