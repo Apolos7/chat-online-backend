@@ -1,7 +1,7 @@
 package ifs.edu.br.chatonlinebackend.controller;
 
 import ifs.edu.br.chatonlinebackend.config.filters.JwtAuthRequestFilter;
-import ifs.edu.br.chatonlinebackend.model.dto.LoginDTO;
+import ifs.edu.br.chatonlinebackend.model.dto.SignUpDTO;
 import ifs.edu.br.chatonlinebackend.service.JwtAuthenticationService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class AuthenticationController {
     private JwtAuthenticationService jwtAuthenticationService;
 
     @PostMapping(value = "/authenticate")
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody LoginDTO authenticationRequest, HttpServletResponse response) throws Exception {
+    public ResponseEntity<?> createAuthenticationToken(@RequestBody SignUpDTO authenticationRequest, HttpServletResponse response) throws Exception {
         String token = jwtAuthenticationService.autenticarUsuario(authenticationRequest);
         response.addHeader(JwtAuthRequestFilter.AUTHORIZATION_HEADER, token);
         return ResponseEntity.ok().build();

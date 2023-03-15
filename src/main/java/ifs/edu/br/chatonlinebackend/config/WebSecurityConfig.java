@@ -5,6 +5,7 @@ import ifs.edu.br.chatonlinebackend.util.JwtAuthenticationEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -32,7 +33,7 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf((csrf) -> csrf.disable())
                 .authorizeHttpRequests((authRequest) ->
-                        authRequest.requestMatchers("/authenticate").permitAll()
+                        authRequest.requestMatchers(HttpMethod.POST,"/authenticate", "/user").permitAll()
                                 .requestMatchers(toH2Console()).permitAll()
                                 .anyRequest().authenticated()
                 )

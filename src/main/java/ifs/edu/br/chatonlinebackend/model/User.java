@@ -1,5 +1,6 @@
 package ifs.edu.br.chatonlinebackend.model;
 
+import ifs.edu.br.chatonlinebackend.model.dto.SignInDTO;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -23,7 +24,7 @@ public class User implements UserDetails {
     @Column(name = "use_tx_username", unique = true, nullable = false, length = 150)
     private String username;
 
-    @Column(name = "use_tx_password", unique = true, nullable = false)
+    @Column(name = "use_tx_password", nullable = false)
     private String password;
 
     @Override
@@ -54,5 +55,11 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public SignInDTO toSignInDto() {
+        return SignInDTO.builder()
+                .username(username)
+                .build();
     }
 }

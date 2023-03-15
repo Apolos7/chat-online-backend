@@ -1,7 +1,7 @@
 package ifs.edu.br.chatonlinebackend.service;
 
 import ifs.edu.br.chatonlinebackend.model.User;
-import ifs.edu.br.chatonlinebackend.model.dto.LoginDTO;
+import ifs.edu.br.chatonlinebackend.model.dto.SignUpDTO;
 import ifs.edu.br.chatonlinebackend.util.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,9 +21,9 @@ public class JwtAuthenticationService {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    public String autenticarUsuario(LoginDTO loginDTO) throws Exception {
-        authenticate(loginDTO.getUsername(), loginDTO.getPassword());
-        User usuarioDetails = userDetailsService.loadUserByUsername(loginDTO.getUsername());
+    public String autenticarUsuario(SignUpDTO signUpDTO) throws Exception {
+        authenticate(signUpDTO.getUsername(), signUpDTO.getPassword());
+        User usuarioDetails = userDetailsService.loadUserByUsername(signUpDTO.getUsername());
         return jwtTokenUtil.generateToken(usuarioDetails);
     }
 
